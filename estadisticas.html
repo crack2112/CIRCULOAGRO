@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTADISTICAS</title>
+    <!-- Ícono de la pestaña (favicon) -->
+    <link rel="icon" type="image/png" href="assets/reciclaje.png.png">
+    <link rel="stylesheet" href="diseño.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="start.html" class="logo-link">
+                <img src="imagenes/logo.png" alt="Círculo Agro" class="logo-img">
+            </a>
+            <nav class="nav">
+                <a href="start.html" class="nav-link">Inicio</a>
+                <a href="modulomapa.html" class="nav-link">Mapa</a>
+                <a href="modulochat.html" class="nav-link">Chat</a>
+                <a href="modulovista1.html" class="nav-link">Marketplace</a>
+                <a href="perfil.html" class="nav-link">Perfil</a>
+                <a href="estadisticas.html" class="nav-link active">Estadísticas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content" style="padding:30px 20px;">
+        <div class="container" style="max-width:1000px; background:#fff; padding:25px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06);">
+            <h1>Estadísticas</h1>
+            <p style="color:#555;">Vista rápida de los datos más relevantes de la plataforma.</p>
+
+            <!-- Gráficos -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;">
+                <div>
+                    <h3>Valor por producto (USD)</h3>
+                    <canvas id="chartValue"></canvas>
+                </div>
+                <div>
+                    <h3>Precio promedio / producto</h3>
+                    <canvas id="chartAvg"></canvas>
+                </div>
+            </div>
+
+            <section style="margin-top:20px;">
+                <h3>Notas</h3>
+                <ul>
+                    <li>Se aplica una comisión del <strong>7%</strong> a las transacciones.</li>
+                    <li>Los datos mostrados aquí son un resumen rápido basado en los productos registrados en la plataforma.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+// Datos de ejemplo (basados en los productos del marketplace)
+const productsSample = [
+    { title: 'Compost Orgánico', price: 15.00 },
+    { title: 'Macetas Recicladas', price: 8.00 },
+    { title: 'Fertilizante Líquido', price: 12.00 },
+    { title: 'Muebles de Palets', price: 45.00 },
+    { title: 'Tejidos Reciclados', price: 22.00 },
+    { title: 'Adobes Ecológicos', price: 7.00 }
+];
+
+// Preparar datos para gráficos
+const labels = productsSample.map(p => p.title);
+const values = productsSample.map(p => p.price);
+const avg = productsSample.map(() => (values.reduce((a,b)=>a+b,0)/values.length).toFixed(2));
+
+// Chart: Valor por producto
+const ctx1 = document.getElementById('chartValue').getContext('2d');
+new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Precio (USD)',
+            data: values,
+            backgroundColor: 'rgba(46,139,87,0.7)'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+
+// Chart: Precio promedio (línea)
+const ctx2 = document.getElementById('chartAvg').getContext('2d');
+new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Precio promedio (USD)',
+            data: avg,
+            borderColor: 'rgba(154,205,50,0.9)',
+            backgroundColor: 'rgba(154,205,50,0.2)'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+    }
+});
+</script>
+</body>
+</html>

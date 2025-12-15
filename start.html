@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>INICIO</title>
+    <!-- Ícono de la pestaña (favicon) -->
+    <link rel="icon" type="image/png" href="assets/reciclaje.png.png">
+    <style>
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #4CAF50;
+            --accent-color: #9ACD32;
+            --light-color: #F5F5F5;
+            --dark-color: #2F4F4F;
+            --text-color: #333;
+            --white: #FFFFFF;
+
+        
+        } /* #4CAF50 verde logo */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .cart-button {
+            background-color: var(--white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-button:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .hero {
+            background: url('imagenes/imageninicio3.png') no-repeat center center;
+            background-size: cover;
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #8FBC8F;
+            transform: translateY(-2px);
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Carousel styles */
+        .carousel {
+            max-width: 1000px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s ease;
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            width: 45%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .carousel-caption {
+            width: 55%;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .carousel-controls button {
+            pointer-events: all;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 10px 14px;
+            margin: 0 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            padding: 12px 0 18px;
+            background: transparent;
+        }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+        }
+
+        .carousel-indicators button.active {
+            background: var(--primary-color);
+        }
+
+        /* Info & cards */
+        .info-block {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: var(--white);
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .info-card-compact {
+            background: var(--light-color);
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .final-cta {
+            max-width: 1000px;
+            margin: 30px auto 60px;
+            background: linear-gradient(90deg,var(--accent-color),var(--primary-color));
+            color: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .features {
+            padding: 60px 20px;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(238, 2, 2, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .how-it-works {
+            padding: 60px 20px;
+            background-color: var(--light-color);
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            background-color: rgba(170, 15, 15, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .nav {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo-link">
+                <img src="imagenes/logo.png" alt="Círculo Agro" class="logo-img">
+            </a>
+            <nav class="nav">
+                <a href="start.html" class="nav-link active">Inicio</a>
+                <a href="modulomapa.html" class="nav-link">Mapa</a>
+                <a href="modulochat.html" class="nav-link">Chat</a>
+                <a href="modulovista1.html" class="nav-link">Marketplace</a>
+                <a href="perfil.html" class="nav-link">Perfil</a>
+                <a href="estadisticas.html" class="nav-link">Estadísticas</a>
+            </nav>
+           
+        </div>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Gestión Responsable de Desechos Orgánicos</h1>
+            <p>Transformando residuos en recursos para un futuro sostenible.</p>
+            <div style="display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap;">
+                <a href="perfil.html" class="cta-button">Conocer más</a>
+                <a href="#carrusel-desechos" class="cta-button">Ver tipos de desechos</a>
+                <a href="modulomapa.html" class="cta-button">Iniciar clasificación</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Desechos Orgánicos -->
+    <section id="carrusel-desechos" class="carousel" aria-label="Carrusel de desechos orgánicos">
+        <div class="carousel-track" id="carouselTrack">
+            <article class="carousel-slide">
+                <img src="imagenes/frutas.jpeg" alt="Restos de frutas y verduras" loading="lazy">
+                <div class="carousel-caption">
+                    <h3>Restos de frutas y verduras</h3>
+                    <p>Cáscaras, semillas y restos vegetales biodegradables. Perfectos para compostaje y abonos orgánicos.</p>
+                </div>
+            </article>
+            <article class="carousel-slide">
+                <img src="imagenes/cocina.jpg" alt="Residuos de cocina" loading="lazy">
+                <div class="carousel-caption">
+                    <h3>Residuos de cocina</h3>
+                    <p>Sobras de alimentos no procesados; fáciles de separar y aptos para procesos de compostaje doméstico.</p>
+                </div>
+            </article>
+            <article class="carousel-slide">
+                <img src="imagenes/jardineria.jpg" alt="Desechos de jardinería" loading="lazy">
+                <div class="carousel-caption">
+                    <h3>Desechos de jardinería</h3>
+                    <p>Hojas secas, ramas pequeñas y césped; valiosos para el material marrón en pilas de compost.</p>
+                </div>
+            </article>
+            <article class="carousel-slide">
+                <img src="imagenes/organico.jpeg" alt="Residuos orgánicos compostables" loading="lazy">
+                <div class="carousel-caption">
+                    <h3>Residuos orgánicos compostables</h3>
+                    <p>Material apto para procesos de compostaje industrial o casero que mejora la salud del suelo.</p>
+                </div>
+            </article>
+        </div>
+        <div class="carousel-controls">
+            <button id="prevBtn" aria-label="Anterior">◀</button>
+            <button id="nextBtn" aria-label="Siguiente">▶</button>
+        </div>
+        <div class="carousel-indicators" id="carouselIndicators" role="tablist"></div>
+    </section>
+    <!-- Información y beneficios -->
+    <section class="info-block">
+        <h2 class="section-title">¿Por qué es importante?</h2>
+        <p>La correcta gestión de los desechos orgánicos reduce la contaminación ambiental, mejora la calidad del suelo y contribuye a la economía circular. Separar y tratar adecuadamente estos residuos es una acción clave para la sostenibilidad.</p>
+
+        <div class="cards-grid" aria-hidden="false">
+            <div class="info-card-compact">
+                <div style="font-size:28px">♻</div>
+                <h4>Reducción de residuos</h4>
+            </div>
+            <div class="info-card-compact">
+                <div style="font-size:28px">🌱</div>
+                <h4>Cuidado del medio ambiente</h4>
+            </div>
+            <div class="info-card-compact">
+                <div style="font-size:28px">🌍</div>
+                <h4>Impacto positivo en la comunidad</h4>
+            </div>
+            <div class="info-card-compact">
+                <div style="font-size:28px">�</div>
+                <h4>Aprovechamiento sostenible</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Empieza hoy a gestionar tus desechos orgánicos de forma responsable</h2>
+        <p>Únete a la comunidad, aprende a separar y transforma residuos en recursos.</p>
+        <div style="margin-top:12px;"><a class="cta-button" href="modulomapa.html">Iniciar clasificación</a></div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2 class="section-title">Cómo Funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Regístrate como Emprendedor</h3>
+                    <p>Crea tu perfil en Círculo Agro, describe tus habilidades y los tipos de residuos que puedes transformar en productos innovadores.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Encuentra Residuos</h3>
+                    <p>Utiliza nuestro mapa interactivo para localizar generadores de residuos que coincidan con tus necesidades y preferencias.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Conéctate y Negocia</h3>
+                    <p>Usa nuestro chat para comunicarte directamente con los generadores de residuos, acordar precios y condiciones de entrega.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Vende tus Creaciones</h3>
+                    <p>Publica tus productos elaborados con residuos reciclados en nuestro marketplace y alcanza a clientes que valoran la sostenibilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- FOOTER PROFESIONAL - CÍRCULO AGRO -->
+<footer class="footer">
+  <div class="footer-overlay"></div>
+
+  <div class="footer-container">
+
+    <!-- COLUMNA 1: MARCA -->
+    <div class="footer-col brand">
+      <h2 class="brand-title">Círculo Agro</h2>
+      <p class="brand-text">
+        Plataforma digital que conecta emprendedores, productores y gestores ambientales
+        para transformar residuos orgánicos en oportunidades sostenibles.
+      </p>
+
+      <div class="social-icons">
+     <div class="social-icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+  <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+</div>
+
+      </div>
+    </div>
+
+    <!-- COLUMNA 2: NAVEGACIÓN -->
+    <div class="footer-col">
+      <h3>Explorar</h3>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Mapa interactivo</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">Chat comunitario</a></li>
+        <li><a href="#">Mi perfil</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMNA 3: INFORMACIÓN -->
+    <div class="footer-col">
+      <h3>Información</h3>
+      <ul>
+        <li><a href="#">¿Cómo funciona?</a></li>
+        <li><a href="#">Tipos de residuos</a></li>
+        <li><a href="#">Beneficios ambientales</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMNA 4: CONTACTO + NEWSLETTER -->
+    <div class="footer-col contact">
+      <h3>Contacto</h3>
+      <p>📧 circuloagro@gmail.com</p>
+      <p>📞 +7788976</p>
+      <p>📍 Chiriquí – David, Panamá</p>
+
+      <div class="newsletter">
+        <h4>Boletín ecológico</h4>
+        <p>Recibe consejos y noticias sobre gestión de residuos orgánicos.</p>
+        <form>
+          <input type="email" placeholder="Tu correo electrónico" required>
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BARRA INFERIOR -->
+  <div class="footer-bottom">
+    <p>© 2025 Círculo Agro · Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<!-- ESTILOS -->
+<style>
+
+    
+.footer{
+  position: relative;
+  background: linear-gradient(135deg, #0f3d2e, #1b5e20);
+  color: #e8f5e9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  padding: 60px 10%;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-col h3{
+  color: #a5d6a7;
+  margin-bottom: 15px;
+}
+
+.brand-title{
+  font-size: 1.8rem;
+  color: #c5e1a5;
+}
+
+.brand-text{
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.footer-col ul{
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li{
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a{
+  color: #e8f5e9;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover{
+  color: #aed581;
+}
+
+.social-icons{
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.social-icons{
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons a{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8f5e9;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover{
+  background: #81c784;
+  color: #0f3d2e;
+  transform: translateY(-4px);
+}
+
+
+.contact p{
+  margin: 6px 0;
+}
+
+.newsletter{
+  margin-top: 20px;
+}
+
+.newsletter h4{
+  margin-bottom: 8px;
+  color: #c5e1a5;
+}
+
+.newsletter form{
+  display: flex;
+  margin-top: 10px;
+}
+
+.newsletter input{
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.newsletter button{
+  padding: 10px 18px;
+  border: none;
+  background: #66bb6a;
+  color: #0f3d2e;
+  font-weight: bold;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover{
+  background: #81c784;
+}
+
+.footer-bottom{
+  text-align: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.25);
+  font-size: 0.9rem;
+}
+</style>
+
+
+<script>
+// Carrusel simple: autoplay, controles y indicadores
+(function(){
+    const track = document.getElementById('carouselTrack');
+    if(!track) return;
+    const slides = Array.from(track.children);
+    const indicatorsEl = document.getElementById('carouselIndicators');
+    let current = 0;
+    const intervalMs = 4000;
+    let intervalId = null;
+
+    function goTo(index){
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        updateIndicators();
+    }
+
+    function next(){ goTo(current+1); }
+    function prev(){ goTo(current-1); }
+
+    // crear indicadores
+    slides.forEach((s,i)=>{
+        const btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Ir al slide '+(i+1));
+        if(i===0) btn.classList.add('active');
+        btn.addEventListener('click', ()=>{ goTo(i); resetInterval(); });
+        indicatorsEl.appendChild(btn);
+    });
+
+    function updateIndicators(){
+        Array.from(indicatorsEl.children).forEach((b,idx)=>{
+            b.classList.toggle('active', idx===current);
+        });
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', ()=>{ next(); resetInterval(); });
+    document.getElementById('prevBtn').addEventListener('click', ()=>{ prev(); resetInterval(); });
+
+    function startInterval(){ intervalId = setInterval(next, intervalMs); }
+    function stopInterval(){ clearInterval(intervalId); intervalId = null; }
+    function resetInterval(){ stopInterval(); startInterval(); }
+
+    // pause on hover
+    const carousel = document.querySelector('.carousel');
+    carousel.addEventListener('mouseenter', stopInterval);
+    carousel.addEventListener('mouseleave', startInterval);
+
+    // init
+    goTo(0);
+    startInterval();
+})();
+</script>

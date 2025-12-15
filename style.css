@@ -1,0 +1,227 @@
+/* ===== RESET Y VARIABLES ===== */
+*{ margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --fondo-verde-oscuro: rgba(0, 50, 0, 0.55);
+  --verde-oscuro: #2e7d32;
+  --verde-1: #a5d6a7;
+  --verde-2: #81c784;
+  --texto: #ffffff;
+  --agro: #7ed957;
+}
+
+html, body { height: 100%; }
+body{
+  font-family: 'Nunito', sans-serif;
+  color: var(--texto);
+  overflow-x: hidden;
+  overflow-y: auto;               /* permitir scroll */
+  position: relative;
+  background-image: url('https://images.pexels.com/photos/29464873/pexels-photo-29464873.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Fondo ecológico oscuro translúcido */
+body::before{
+  content:'';
+  position: fixed;
+  inset: 0;
+  background: var(--fondo-verde-oscuro);
+  z-index: 0;
+}
+
+/* ===== ENCABEZADO ===== */
+.header-brand{
+  position: fixed;
+  top: 25px; left: 25px;
+  z-index: 3;
+  display: flex; align-items: center; gap: 12px;
+  text-shadow: 0 3px 10px rgba(0,0,0,.35);
+}
+.logo-emoji{
+  width: 60px; height: 60px;
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: waveHand 1.8s ease-in-out infinite;
+}
+
+/* Animación de texto “Bienvenido” */
+.brand-text { display:flex; gap:2px; font-size:34px; font-weight:800; color:var(--texto); overflow:hidden; }
+.brand-text span{ display:inline-block; opacity:0; transform:translateY(15px); animation:jumpIn .6s ease forwards; }
+@keyframes jumpIn { 0%{opacity:0;transform:translateY(15px) scale(.9)} 50%{opacity:1;transform:translateY(-8px) scale(1.05)} 100%{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes waveHand{
+  0%{transform:rotate(0)}10%{transform:rotate(15deg)}20%{transform:rotate(-8deg)}
+  30%{transform:rotate(10deg)}40%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}
+  60%{transform:rotate(-3deg)}100%{transform:rotate(0)}
+}
+
+/* ===== CONTENIDO (HERO) ===== */
+.contenedor{
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 16px; padding: 0 20px;
+}
+.texto{ font-size:18px; font-weight:600; text-shadow:0 2px 8px rgba(0,0,0,.35); }
+
+/* Tarjeta “glass” */
+.hero{
+  max-width: 640px;
+  width: 92vw;
+  margin: 0 auto;
+  gap: 16px;
+  padding: 22px 28px 18px;
+  background: rgba(0,0,0,.32);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 22px 52px rgba(0,0,0,.46);
+  display:flex; flex-direction:column; align-items:center;
+  animation: heroIn .6s ease both;
+}
+
+/* Logo con fondo blanco y bordes redondeados */
+.logo-img{
+  width: 84%;
+  max-width: 420px;               /* cámbialo a 460px si lo quieres un poco mayor */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.22);
+  image-rendering: -webkit-optimize-contrast;
+  object-fit: contain;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+.logo-img::after{
+  content:"";
+  position:absolute; inset:6px;
+  border-radius: 12px;
+  box-shadow: inset 0 6px 18px rgba(0,0,0,.06);
+  pointer-events:none;
+}
+
+/* Lema */
+.claim{
+  margin-top: 2px;
+  text-align: center;
+  line-height: 1.2;
+  color:#fff;
+  font-weight:700;
+  text-shadow: 0 2px 10px rgba(0,0,0,.55);
+}
+
+/* ===== BOTÓN ===== */
+#btn-iniciar{
+  margin-top: 25px;
+  background: var(--verde-oscuro);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  border: none;
+  padding: 14px 44px;
+  border-radius: 32px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(0,0,0,.25);
+  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+}
+#btn-iniciar:hover{ transform: translateY(-1px) scale(1.03); filter: brightness(1.12); }
+
+/* ===== ONDAS ===== */
+.bg-wave{
+  position: fixed;
+  bottom: -2px; left: 50%;
+  width: 140%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: .95;
+}
+.wave-1{ animation: driftX 12s linear infinite, bob 6s ease-in-out infinite; }
+.wave-2{ animation: driftXRev 16s linear infinite, bob 8s ease-in-out infinite; }
+@keyframes driftX{ 0%{transform:translateX(0)}100%{transform:translateX(-6%)} }
+@keyframes driftXRev{ 0%{transform:translateX(0)}100%{transform:translateX(6%)} }
+@keyframes bob{ 0%,100%{transform:translateY(0)}50%{transform:translateY(4px)} }
+
+/* ===== LOADER ===== */
+#loader{
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  display: grid; place-items: center; z-index: 4;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+#loader.show{ opacity: 1; pointer-events: auto; backdrop-filter: blur(4px); }
+.loader-card{
+  width: 260px; height: 260px; background: rgba(20,60,20,.85);
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  display:flex; align-items:center; justify-content:center;
+}
+.loader-recycle{
+  width: 200px; height: 200px; object-fit: contain;
+  animation: spinRecycle 2.6s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(126,217,87,.4));
+}
+@keyframes spinRecycle{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+@keyframes riseIn{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+@keyframes heroIn{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 680px){
+  .brand-text{ font-size: 24px }
+  .logo-emoji{ width: 42px; height: 42px }
+  .texto{ font-size: 16px }
+  #btn-iniciar{ font-size: 18px; padding: 12px 36px; border-radius: 28px; }
+}
+@media (max-width: 480px){
+  .hero{ padding: 16px 16px 14px; gap: 12px; max-width: 92vw; }
+  .logo-img{ width: 92%; max-width: 360px; padding: 8px 14px; border-radius: 14px; }
+  .claim{ font-size: 15px; }
+}
+
+/* ===== SECCIÓN MISIÓN / VISIÓN ===== */
+.info-section{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  margin: 140px auto 100px; /* sube más la sección */
+  width: 85%;
+  max-width: 900px;
+  scroll-margin-top: 80px;
+}
+.info-card{
+  background: rgba(10, 40, 10, 0.55);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 35px 45px;
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(70px);
+  transition: all 1s ease-out;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.info-card.show{ opacity: 1; transform: translateY(0); }
+.info-card h2{
+  color: #7ed957;
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+.info-card p{ font-size: 1.05rem; line-height: 1.7; color: #e6ffe6; }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Círculo Agro</title>
+    <!-- Ícono de la pestaña (favicon) -->
+    <link rel="icon" type="image/png" href="assets/reciclaje.png.png">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Encabezado con mano animada -->
+  <header class="header-brand" aria-label="Saludo">
+    <img src="39cd6fdb7babe4a40918b140556ea4fd78ac587a.png" alt="saludo" class="logo-emoji" />
+    <h1 class="brand-text" aria-label="Bienvenido">Bienvenido</h1>
+  </header>
+
+  <!-- Ondas verdes -->
+  <svg class="bg-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240" aria-hidden="true">
+    <path class="wave-1" fill="#a5d6a7" d="M0,160L60,144C120,128,240,96,360,96C480,96,600,128,720,144C840,160,960,160,1080,144C1200,128,1320,96,1380,80L1440,64L1440,240L1380,240C1320,240,1200,240,1080,240C960,240,840,240,720,240C600,240,480,240,360,240C240,240,120,240,60,240L0,240Z"/>
+    <path class="wave-2" fill="#81c784" d="M0,200L60,192C120,184,240,168,360,160C480,152,600,152,720,160C840,168,960,184,1080,176C1200,168,1320,136,1380,120L1440,104L1440,240L1380,240C1320,240,1200,240,1080,240C960,240,840,240,720,240C600,240,480,240,360,240C240,240,120,240,60,240L0,240Z"/>
+  </svg>
+
+  <!-- Loader con símbolo circular de reciclaje -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-card">
+      <img src="recycle-loader.png" alt="símbolo de reciclaje" class="loader-recycle" />
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="contenedor">
+    <div class="hero">
+      <img src="logoca.png" alt="CírculoAgro" class="logo-img" />
+      <p class="claim">De desecho a recurso, de problema a solución</p>
+    </div>
+    <button id="btn-iniciar" type="button">Iniciar</button>
+  </main>
+
+  <!-- Sección Misión y Visión -->
+  <section class="info-section">
+    <div class="info-card">
+      <h2>MISIÓN</h2>
+      <p>
+        Promover la reutilización, reciclaje e innovación ecológica mediante una red
+        que conecte a artesanos, productores y consumidores, generando impacto ambiental positivo
+        y desarrollo local sostenible.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h2>VISIÓN</h2>
+      <p>
+        Ser una plataforma líder en sostenibilidad y economía circular en Panamá,
+        impulsando la transformación de los desechos en recursos útiles y fortaleciendo
+        la conciencia ambiental en las comunidades.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Animación "Bienvenido" letra por letra, repite cada 10s
+    (function(){
+      const brand = document.querySelector('.brand-text');
+      const text = brand.textContent.trim();
+      brand.innerHTML = text.split('').map((ch,i)=>(
+        `<span style="animation-delay:${i*0.08}s">${ch}</span>`
+      )).join('');
+      function replay(){
+        brand.querySelectorAll('span').forEach((s,i)=>{
+          s.style.animation = 'none';
+          s.offsetHeight; // reflow
+          s.style.animation = 'jumpIn .6s ease forwards';
+          s.style.animationDelay = `${i*0.08}s`;
+        });
+      }
+      setInterval(replay, 10000);
+    })();
+
+    // Botón de carga + navegación
+    const btn = document.getElementById('btn-iniciar');
+    const loader = document.getElementById('loader');
+    btn.addEventListener('click', () => {
+      loader.classList.add('show');
+      setTimeout(() => { window.location.href = 'start.html'; }, 1300);
+    });
+
+    // Mostrar tarjetas Misión/Visión al hacer scroll
+    const cards = document.querySelectorAll(".info-card");
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("show"); });
+    }, { threshold: 0.3 });
+    cards.forEach(c => obs.observe(c));
+  </script>
+</body>
+</html>
